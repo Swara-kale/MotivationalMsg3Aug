@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational Msg App</title>
+    <style>
+        * {
+            font-size: 50px;
+            font-family: Garamond;
+        }
+        h1, h2 {
+            width: 70%;
+            border-radius: 30px;
+            border: solid 2px black;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+             
+        }
+        body {
+            background: url('https://image.freepik.com/free-photo/beautiful-early-morning-sunrise-sea-horizon-blue-sky-background-texture-with-white-clouds-sunset_29332-965.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        input[type="submit"] {
+            font-size: 40px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border:none;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            color:rgb(21, 19, 19);
+            background-color: rgb(170, 207, 249);
+        }
+        input[type="submit"]:hover{
+            box-shadow: 9px 9px 15px rgba(0, 0, 0, 0.3); 
+            background-color: rgb(248, 234, 244);
+            border: solid 2px black;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Motivational Msg App</h1>
+        <form id="msgForm">
+            <input type="submit" value="Get Message" />
+        </form>
+        <h2 id="msg"></h2>
+        <h2 id="aut"></h2>
+    </center>
+
+    <script>
+        document.getElementById("msgForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            show();
+        });
+
+        function show() {
+            let msg = document.getElementById("msg");
+            let aut = document.getElementById("aut");
+            let url = "https://quotes-api-self.vercel.app/quote";
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    msg.innerHTML = data.quote;
+                    aut.innerHTML = data.author;
+                })
+                .catch(err => msg.innerHTML = "Issue: " + err);
+        }
+    </script>
+</body>
+</html>
